@@ -16,15 +16,16 @@ if (isset($_SESSION['hapus_error'])) {
 			<tr>
 				<td></td>
 				<td colspan="2">
-					<form action="list_data.php?aksi=search" method="post">
+					<form action="list_data.php" method="get">
+						<input type="hidden" name="aksi" value="search">
 						<input type="text" name="data_mahasiswa">
-						<input type="submit" name="search" value="Search">
+						<input type="submit">
 					</form>
 				</td>
 			</tr>
 		<?php
-		if(isset($_GET['aksi']) && $_GET['aksi'] == 'search' && isset($_POST['data_mahasiswa'])){
-			$data_mahasiswa = $_POST['data_mahasiswa'];
+		if(isset($_GET['aksi']) && $_GET['aksi'] == 'search' && isset($_GET['data_mahasiswa'])){
+			$data_mahasiswa = $_GET['data_mahasiswa'];
 			$query ="SELECT `id`, `nim`, `nama` FROM `mahasiswa` WHERE `nim` LIKE '%$data_mahasiswa%' OR `nama` LIKE '%$data_mahasiswa%'";
 		} else {
 			$query ="SELECT `id`, `nim`, `nama` FROM `mahasiswa` WHERE 1";
